@@ -1,0 +1,36 @@
+stages:
+  preprocessing:
+    cmd: python src/preprocessing.py
+    deps:
+      - data/raw/Dataset-SA.csv
+      - src/preprocessing.py
+    outs:
+      - data/processed/preprocessed_data.json
+    params:
+      - preprocessing
+      
+  feature_extraction:
+    cmd: python src/feature_extraction.py
+    deps:
+      - data/processed/preprocessed_data.json
+      - src/feature_extraction.py
+    outs:
+      - data/processed/vectorized_data.json
+      - data/processed/final_data.json
+    params:
+      - feature_extraction
+      
+  train:
+    cmd: python src/train.py
+    deps:
+      - data/processed/final_data.json
+      - src/train.py
+      - src/evaluate.py
+    outs:
+      - models/best_model.pkl
+      - models/feature_selector.pkl
+    params:
+      - training
+    metrics:
+      - mlruns/0/.meta.yaml:
+          cache: false
