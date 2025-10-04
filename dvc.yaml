@@ -31,6 +31,4 @@ stages:
       - models/feature_selector.pkl
     params:
       - training
-    metrics:
-      - mlruns/0/.meta.yaml:
-          cache: false
+    

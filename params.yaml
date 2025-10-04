@@ -53,10 +53,9 @@ training:
 # MLflow configuration
 mlflow:
   experiment_name: flipkart_sentiment_experiment
-  tracking_uri: mlruns  # Local tracking, change to DagsHub URL later
+  tracking_uri: https://dagshub.com/rs5294645/flipkart-sentiment-mlops.mlflow
 
 # API configuration
 api:
   model_path: models/best_model.pkl
   port: 8000
-  
