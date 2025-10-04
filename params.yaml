@@ -1,0 +1,62 @@
+# Data parameters
+data:
+  raw_path: data\\raw\\Dataset-SA.csv
+  processed_path: data\\processed\\
+  vectorized_file: data\\processed\\vectorized_data.json
+  final_file: data\\processed\\final_data.json
+
+# Preprocessing parameters
+preprocessing:
+  text_column: Summary
+  target_column: Sentiment
+  sentiment_mapping:
+    positive: 2
+    neutral: 1
+    negative: 0
+
+# Feature extraction
+feature_extraction:
+  spacy_model: en_core_web_sm
+  n_features: 60  # Number of features to select
+
+# Model training parameters
+training:
+  test_size: 0.2
+  random_state: 42
+  
+  # Logistic Regression
+  logistic_regression:
+    max_iter: 1000
+    random_state: 42
+  
+  # Decision Tree
+  decision_tree:
+    random_state: 42
+    max_depth: null
+  
+  # Random Forest
+  random_forest:
+    n_estimators: 100
+    random_state: 42
+    n_jobs: -1
+  
+  # LSTM
+  lstm:
+    input_dim: 20000
+    output_dim: 100
+    input_length: 60
+    dropout: 0.2
+    recurrent_dropout: 0.2
+    epochs: 10
+    batch_size: 32
+
+# MLflow configuration
+mlflow:
+  experiment_name: flipkart_sentiment_experiment
+  tracking_uri: mlruns  # Local tracking, change to DagsHub URL later
+
+# API configuration
+api:
+  model_path: models/best_model.pkl
+  port: 8000
+  

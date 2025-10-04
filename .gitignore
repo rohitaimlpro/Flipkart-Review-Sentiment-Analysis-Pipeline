@@ -1,0 +1,7 @@
+venv/
+data/raw/*.csv
+data/processed/*.json
+models/*.pkl
+mlruns/
+__pycache__/
+*.pyc

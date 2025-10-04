@@ -1,0 +1,52 @@
+schema: '2.0'
+stages:
+  preprocessing:
+    cmd: python src/preprocessing.py
+    deps:
+    - path: data/raw/Dataset-SA.csv
+      hash: md5
+      md5: d90f8bcf65b49f00588b39e67a0eaa07
+      size: 33357584
+    - path: src/preprocessing.py
+      hash: md5
+      md5: 22b6221782f3bc533af454d4154388cb
+      size: 5350
+    params:
+      params.yaml:
+        preprocessing:
+          text_column: Summary
+          target_column: Sentiment
+          sentiment_mapping:
+            positive: 2
+            neutral: 1
+            negative: 0
+    outs:
+    - path: data/processed/preprocessed_data.json
+      hash: md5
+      md5: b65b4e995d32f2bd492fbaf35e00abe7
+      size: 13434351
+  feature_extraction:
+    cmd: python src/feature_extraction.py
+    deps:
+    - path: data/processed/preprocessed_data.json
+      hash: md5
+      md5: b65b4e995d32f2bd492fbaf35e00abe7
+      size: 13434351
+    - path: src/feature_extraction.py
+      hash: md5
+      md5: 765a3548512b581838b3a67b2c04fbc6
+      size: 6914
+    params:
+      params.yaml:
+        feature_extraction:
+          spacy_model: en_core_web_sm
+          n_features: 60
+    outs:
+    - path: data/processed/final_data.json
+      hash: md5
+      md5: 4f9b467b18d725536f18537bb1ceb5e9
+      size: 626164492
+    - path: data/processed/vectorized_data.json
+      hash: md5
+      md5: 0e26ffb6b09c3d130cc2f7772ea04bad
+      size: 269282140
